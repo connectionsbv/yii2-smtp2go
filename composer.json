@@ -1,0 +1,42 @@
+{
+  "name": "connectionsbv/yii2-smtp2go",
+  "version": "0.0.1",
+  "description": "A library provides Yii2 integration with SMTP2GO mail service",
+  "keywords": [
+    "smtp2go",
+    "email",
+    "yii2",
+    "yii",
+    "extension",
+    "mailer"
+  ],
+  "require": {
+    "php": ">=8.0",
+    "yiisoft/yii2": "~2.0.14",
+    "smtp2go-oss/smtp2go-php": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "connectionsbv\\smtp2go\\": "src/"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dennis van Veen",
+      "email": "dennis.vanveen@connections-it.com"
+    }
+  ],
+  "type": "library",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
+  }
+}
