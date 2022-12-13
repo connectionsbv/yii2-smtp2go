@@ -293,37 +293,29 @@ class Message extends BaseMessage
         if (empty($this->attachments)) {
             return null;
         }
-        $attachments = [];
-        foreach ($this->attachments as $attachment) {
-            $attachments[] = new Attachment($attachment);
-        }
 
-        return new AttachmentCollection($attachments);
+        return new AttachmentCollection($this->attachments);
     }
 
     public function attach($fileName, array $options = [])
     {
-        $this->attachments[] = $fileName;
+        $this->attachments[] = new Attachment($fileName);
 
         return $this;
     }
 
     public function attachContent($content, array $options = [])
     {
-        $attachment = [
-            'Content' => base64_encode($content),
-        ];
+        $filename = '';
         if (!empty($options['fileName'])) {
-            $attachment['Name'] = $options['fileName'];
+            $filename = $options['fileName'];
         } else {
             throw new Exception('Filename is missing');
         }
-        if (!empty($options['contentType'])) {
-            $attachment['ContentType'] = $options['contentType'];
-        } else {
-            $attachment['ContentType'] = 'application/octet-stream';
-        }
-        $this->attachments[] = $attachment;
+        $tempFilename = tempnam(sys_get_temp_dir(), 'smtpattach');
+        file_put_contents($tempFilename, $content);
+
+        $this->attachments[] = new Attachment($tempFilename, $filename);
 
         return $this;
     }
