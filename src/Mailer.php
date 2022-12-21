@@ -4,6 +4,7 @@ namespace connectionsbv\smtp2go;
 
 use SMTP2GO\ApiClient;
 use SMTP2GO\Service\Mail\Send as MailSend;
+use SMTP2GO\Types\Mail\CustomHeader;
 use yii\base\InvalidConfigException;
 use yii\mail\BaseMailer;
 
@@ -42,6 +43,10 @@ class Mailer extends BaseMailer
         $attachments = $message->getAttachments();
         if ($attachments) {
             $sendService->setAttachments($attachments);
+        }
+        $replyTo = $message->getReplyTo();
+        if ($replyTo) {
+            $sendService->addCustomHeader(new CustomHeader('Reply-To', $replyTo));
         }
 
         $apiClient = new ApiClient($this->token);

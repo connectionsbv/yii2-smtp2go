@@ -1,6 +1,6 @@
 {
   "name": "connectionsbv/yii2-smtp2go",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A library provides Yii2 integration with SMTP2GO mail service",
   "keywords": [
     "smtp2go",
