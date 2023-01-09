@@ -53,8 +53,13 @@ class Mailer extends BaseMailer
         $success = $apiClient->consume($sendService);
 
         $responseBody = $apiClient->getResponseBody();
-        if (!empty($responseBody) && !empty($responseBody->data->succeeded)) {
-            return $responseBody->data->email_id;
+        if (!empty($responseBody)) {
+            if (!empty($responseBody->data->succeeded)) {
+                return $responseBody->data->email_id;
+            }
+            if (!empty($responseBody->data->error)) {
+                throw new InvalidConfigException('SMTP2GO: '.$responseBody->data->error);
+            }
         }
 
         return false;
