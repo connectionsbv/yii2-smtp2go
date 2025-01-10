@@ -2,18 +2,9 @@
 
 ## Installation
 
-Edit composer.json. Add
 ```
-    {
-      "type": "vcs",
-      "url": "https://github.com/connectionsbv/yii2-smtp2go"
-    }
+    composer require connectionsbv/yii2-smtp2go
 ```
-to the repositories section and add
-```
-    "connectionsbv/yii2-smtp2go": "*"
-```
-to the required section.
 
 ## Usage
 
@@ -36,7 +27,6 @@ You can then send an email as follows:
 ```php
 Yii::$app->mailer->compose()
     ->setFrom('from@domain.com')
-    ->setReturnPath('from@bounces.domain.com')
     ->setTo($to)
     ->setSubject($from)
     ->send();
